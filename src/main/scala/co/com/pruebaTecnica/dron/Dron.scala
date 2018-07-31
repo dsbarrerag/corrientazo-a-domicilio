@@ -1,21 +1,21 @@
 package co.com.pruebaTecnica.dron
 
-import co.com.pruebaTecnica.Posicion
-import co.com.pruebaTecnica.errores.{NumeroAlmuerzosIncorrecto, ErrorDron}
+import co.com.pruebaTecnica.{Config, Posicion}
+import co.com.pruebaTecnica.errores.{ErrorDron, NumeroAlmuerzosIncorrecto}
 
-// TODO id
-case class Dron(posicion: Posicion, almuerzos: Int)
+case class Dron(id: Int, posicion: Posicion, almuerzos: Int){
+  override def toString: String =
+    s"(${this.posicion.coordenada.x}, ${this.posicion.coordenada.y}) direccion ${this.posicion.orientacion}"
+}
 
 object Dron {
 
-  def apply(): Dron = new Dron(Posicion(), Config.maxAlmuerzos)
+  def apply(id: Int): Dron = new Dron(id: Int, Posicion(), Config.maxAlmuerzos)
 
-  def apply(posicion: Posicion, almuerzos: Int): Either[ErrorDron, Dron] =
+  def apply(id: Int, posicion: Posicion, almuerzos: Int): Either[ErrorDron, Dron] =
     if (almuerzos >= 0 && almuerzos <= Config.maxAlmuerzos)
-      Right(new Dron(posicion, almuerzos))
+      Right(new Dron(id: Int, posicion, almuerzos))
     else
       Left(NumeroAlmuerzosIncorrecto())
 
-  def apply(posicion: Either[ErrorDron, Posicion], almuerzos: Int): Either[ErrorDron, Dron] =
-    posicion.map(p => new Dron(p, almuerzos))
 }
