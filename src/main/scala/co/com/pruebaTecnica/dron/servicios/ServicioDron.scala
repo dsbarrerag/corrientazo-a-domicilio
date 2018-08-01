@@ -1,23 +1,26 @@
-package co.com.pruebaTecnica
+package co.com.pruebaTecnica.dron.servicios
 
+import co.com.pruebaTecnica._
+import co.com.pruebaTecnica.config.Config
 import co.com.pruebaTecnica.dron.Dron
-import co.com.pruebaTecnica.errores.{DistanciaExcedida, ErrorDron}
-import co.com.pruebaTecnica.movimiento._
+import co.com.pruebaTecnica.dron.errores.{DistanciaExcedida, ErrorDron}
+import co.com.pruebaTecnica.ruta._
 
 sealed trait ServicioDronAlgebra {
 
-  def entregarRutaAlmuerzos(dron: Dron, entrega: Seq[Seq[Movimiento]]): Seq[String]
+  type Entrega = Seq[Movimiento]
+
+  def entregarRutaAlmuerzos(dron: Dron, entrega: Seq[Seq[Movimiento]]): Seq[Either[ErrorDron, Dron]]
 
 }
 
 sealed trait ServicioDron extends ServicioDronAlgebra {
 
-  override def entregarRutaAlmuerzos(dron: Dron, ruta: Seq[Seq[Movimiento]]): Seq[String] =
+  override def entregarRutaAlmuerzos(dron: Dron, ruta: Seq[Seq[Movimiento]]): Seq[Either[ErrorDron, Dron]] =
     ruta
       .scanLeft[Either[ErrorDron, Dron], Seq[Either[ErrorDron, Dron]]](Right(dron))((eDron, mov) =>
       eDron.flatMap(d => hacerRuta(d, mov)))
       .tail
-      .map(_.fold(_.error, _.toString))
 
   private def hacerRuta(dron: Dron, instrucciones: Seq[Movimiento]): Either[ErrorDron, Dron] =
     instrucciones

@@ -1,7 +1,5 @@
 package co.com.pruebaTecnica
 
-import co.com.pruebaTecnica.errores.{DistanciaExcedida, ErrorDron}
-
 sealed trait PuntoCardinal
 
 case class N() extends PuntoCardinal {

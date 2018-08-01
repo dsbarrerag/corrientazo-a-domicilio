@@ -1,4 +1,4 @@
-package co.com.pruebaTecnica.errores
+package co.com.pruebaTecnica.dron.errores
 
 sealed trait ErrorDron {
   val error: String

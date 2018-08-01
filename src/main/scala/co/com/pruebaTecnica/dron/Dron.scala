@@ -1,7 +1,8 @@
 package co.com.pruebaTecnica.dron
 
-import co.com.pruebaTecnica.{Config, Posicion}
-import co.com.pruebaTecnica.errores.{ErrorDron, NumeroAlmuerzosIncorrecto}
+import co.com.pruebaTecnica.Posicion
+import co.com.pruebaTecnica.config.Config
+import co.com.pruebaTecnica.dron.errores.{ErrorDron, NumeroAlmuerzosIncorrecto}
 
 case class Dron(id: Int, posicion: Posicion, almuerzos: Int){
   override def toString: String =

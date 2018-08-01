@@ -1,7 +1,9 @@
 package co.com.pruebaTecnica.dron
 
 import co.com.pruebaTecnica._
-import co.com.pruebaTecnica.movimiento.{D, I, A}
+import co.com.pruebaTecnica.config.Config
+import co.com.pruebaTecnica.dron.servicios.ServicioDron
+import co.com.pruebaTecnica.ruta.{A, D, I}
 import org.scalatest.FunSpec
 
 class DronSpecs extends FunSpec {
