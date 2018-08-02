@@ -76,6 +76,7 @@ sealed trait ServicioDron extends ServicioDronAlgebra {
     else
       Left(DistanciaExcedida())
   }
+
   private def validarCoordenada(coordenada: Coordenada): Boolean = {
     coordenada.x >= Config.gridxMin && coordenada.x <= Config.gridXMax &&
       coordenada.y >= Config.gridYMin && coordenada.y <= Config.gridYMax

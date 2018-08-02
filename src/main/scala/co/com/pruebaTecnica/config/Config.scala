@@ -3,7 +3,7 @@ package co.com.pruebaTecnica.config
 object Config {
   val maxAlmuerzos: Int = 10
 
-  val maxDrones: Int = 10
+  val maxDrones: Int = 20
 
   val gridxMin: Int = -10
   val gridXMax: Int = 10

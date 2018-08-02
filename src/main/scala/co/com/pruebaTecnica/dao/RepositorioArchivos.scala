@@ -14,14 +14,14 @@ sealed trait RepositorioArchivosAlgebra {
 sealed trait RepositorioArchivos extends RepositorioArchivosAlgebra {
   override def leerArchivo(ruta: String, nombre: String): Try[Seq[String]] =
     for {
-      buffer <- Try(Source.fromFile(s"${ruta}/${nombre}"))
+      buffer <- Try(Source.fromFile(ruta + nombre))
       lines <- Try(buffer.getLines().toList)
     } yield lines
 
   override def escribirArchivo(ruta: String, nombre: String, contenido: Seq[String]): Try[String] = {
     val filename = s"out${nombre}.txt"
     for {
-      writer <- Try(new PrintWriter(new File(s"$ruta/$filename")))
+      writer <- Try(new PrintWriter(new File(ruta + filename)))
       _ = escribirLinea(contenido, writer)
       _ = writer.close()
     } yield filename
